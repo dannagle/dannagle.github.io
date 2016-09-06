@@ -23,7 +23,7 @@
     }
 
     $(document).ready(function(){
-        $.getJSON( "https://www.devspaceconf.com/api/v1/session", function( data ) {
+        $.getJSON( "session.json", function( data ) {
             for(var i=0; i<data.length; i++) {
                 data[i].StartTime = data[i].TimeSlot.StartTime;
             }
