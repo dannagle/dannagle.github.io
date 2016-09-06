@@ -43,7 +43,7 @@
                 //rowbuilder += val.Id + "</td><td>";
                 rowbuilder += "<a target='_blank' href='"+ "https://www.devspaceconf.com/speakers.html?id=" + val.Speaker.Id + "'>" + val.Speaker.DisplayName + "</a></td><td>";
                 rowbuilder += "<a target='_blank' href='"+ "https://www.devspaceconf.com/sessions.html?id=" + val.Id + "'>" + val.Title + "</td><td>";
-                rowbuilder += moment(val.StartTime).format("dddd, MMMM Do YYYY, h:mm:ss a");
+                rowbuilder += moment(val.StartTime).format("ddd, h:mm:ss a");
                 rowbuilder += "</td></tr>"
                 $("#speaktable").append(rowbuilder);
             });
@@ -71,9 +71,9 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h3><a href="https://www.devspaceconf.com/">DevSpace</a> Speakers</h3>
+        <h3><a href="https://www.devspaceconf.com/">DevSpace Speakers</a>.  October 14th(Fri) &amp; 15th(Sat), 2016</h3>
         <table id="speaktable">
-            <tr><th>Speaker</th><th>Talk</th><th>Time</th></tr>
+            <tr><th  style='min-width:150px'>Speaker</th><th>Talk</th><th style='min-width:120px'>Time</th></tr>
         </table>
     </div>
 
