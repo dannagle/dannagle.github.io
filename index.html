@@ -15,6 +15,21 @@
 
 
     <script>
+    var entityMap = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': '&quot;',
+      "'": '&#39;',
+      "/": '&#x2F;'
+    };
+
+    function escapeHtml(string) {
+      return String(string).replace(/[&<>"'\/]/g, function (s) {
+        return entityMap[s];
+      });
+    }
+
     function sortByKey(array, key) {
         return array.sort(function(a, b) {
             var x = a[key]; var y = b[key];
@@ -39,7 +54,7 @@
                     rowbuilder = "<tr style='background:#384452'><td colspan='3'></td></tr>";
                 }
                 lastTimeSlot = (val.StartTime);
-                rowbuilder += "<tr><td>";
+                rowbuilder += "<tr title='"+escapeHtml(val.Abstract)+"'><td>";
                 //rowbuilder += val.Id + "</td><td>";
                 rowbuilder += "<a target='_blank' href='"+ "https://www.devspaceconf.com/speakers.html?id=" + val.Speaker.Id + "'>" + val.Speaker.DisplayName + "</a></td><td>";
                 rowbuilder += "<a target='_blank' href='"+ "https://www.devspaceconf.com/sessions.html?id=" + val.Id + "'>" + val.Title + "</td><td>";
