@@ -43,7 +43,7 @@
                 //rowbuilder += val.Id + "</td><td>";
                 rowbuilder += "<a target='_blank' href='"+ "https://www.devspaceconf.com/speakers.html?id=" + val.Speaker.Id + "'>" + val.Speaker.DisplayName + "</a></td><td>";
                 rowbuilder += "<a target='_blank' href='"+ "https://www.devspaceconf.com/sessions.html?id=" + val.Id + "'>" + val.Title + "</td><td>";
-                rowbuilder += moment(val.StartTime).format("dddd, MMMM Do YYYY, h:mm:ss a") + "</td><td>";
+                rowbuilder += moment(val.StartTime).format("dddd, MMMM Do YYYY, h:mm:ss a");
                 rowbuilder += "</td></tr>"
                 $("#speaktable").append(rowbuilder);
             });
