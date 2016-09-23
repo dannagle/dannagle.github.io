@@ -41,6 +41,7 @@
         $.getJSON( "session.json", function( data ) {
             for(var i=0; i<data.length; i++) {
                 data[i].StartTime = data[i].TimeSlot.StartTime;
+                data[i].DisplayDateTime = data[i].TimeSlot.DisplayDateTime;
             }
             var items = sortByKey(data, "StartTime");
 
@@ -58,7 +59,7 @@
                 //rowbuilder += val.Id + "</td><td>";
                 rowbuilder += "<a target='_blank' href='"+ "https://www.devspaceconf.com/speakers.html?id=" + val.Speaker.Id + "'>" + val.Speaker.DisplayName + "</a></td><td>";
                 rowbuilder += "<a target='_blank' href='"+ "https://www.devspaceconf.com/sessions.html?id=" + val.Id + "'>" + val.Title + "</td><td>";
-                rowbuilder += moment(val.StartTime).format("ddd, h:mm:ss a");
+                rowbuilder += val.DisplayDateTime;
                 rowbuilder += "</td></tr>"
                 $("#speaktable").append(rowbuilder);
             });
