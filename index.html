@@ -57,7 +57,8 @@
                 lastTimeSlot = (val.StartTime);
                 rowbuilder += "<tr title='"+escapeHtml(val.Abstract)+"'><td>";
                 //rowbuilder += val.Id + "</td><td>";
-                rowbuilder += "<a target='_blank' href='"+ "https://www.devspaceconf.com/speakers.html?id=" + val.Speaker.Id + "'>" + val.Speaker.DisplayName + "</a></td><td>";
+                rowbuilder += "<a target='_blank' href='"+ "https://www.devspaceconf.com/speakers.html?id=" + val.Speaker.Id + "'>" + val.Speaker.DisplayName + "</a>";
+                rowbuilder += "<br>"+ val.Room + "</td><td>";
                 rowbuilder += "<a target='_blank' href='"+ "https://www.devspaceconf.com/sessions.html?id=" + val.Id + "'>" + val.Title + "</td><td>";
                 rowbuilder += val.DisplayDateTime;
                 rowbuilder += "</td></tr>"
