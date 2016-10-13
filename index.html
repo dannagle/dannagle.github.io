@@ -4,7 +4,7 @@
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Dan Nagle at GitHub : Testing site generator">
+    <meta name="description" content="Dan Nagle at GitHub">
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
@@ -15,6 +15,21 @@
 
 
     <script>
+    var entityMap = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': '&quot;',
+      "'": '&#39;',
+      "/": '&#x2F;'
+    };
+
+    function escapeHtml(string) {
+      return String(string).replace(/[&<>"'\/]/g, function (s) {
+        return entityMap[s];
+      });
+    }
+
     function sortByKey(array, key) {
         return array.sort(function(a, b) {
             var x = a[key]; var y = b[key];
@@ -26,6 +41,7 @@
         $.getJSON( "session.json", function( data ) {
             for(var i=0; i<data.length; i++) {
                 data[i].StartTime = data[i].TimeSlot.StartTime;
+                data[i].DisplayDateTime = data[i].TimeSlot.DisplayDateTime;
             }
             var items = sortByKey(data, "StartTime");
 
@@ -39,11 +55,12 @@
                     rowbuilder = "<tr style='background:#384452'><td colspan='3'></td></tr>";
                 }
                 lastTimeSlot = (val.StartTime);
-                rowbuilder += "<tr><td>";
+                rowbuilder += "<tr title='"+escapeHtml(val.Abstract)+"'><td>";
                 //rowbuilder += val.Id + "</td><td>";
-                rowbuilder += "<a target='_blank' href='"+ "https://www.devspaceconf.com/speakers.html?id=" + val.Speaker.Id + "'>" + val.Speaker.DisplayName + "</a></td><td>";
+                rowbuilder += "<a target='_blank' href='"+ "https://www.devspaceconf.com/speakers.html?id=" + val.Speaker.Id + "'>" + val.Speaker.DisplayName + "</a>";
+                rowbuilder += "<br>"+ val.Room + "</td><td>";
                 rowbuilder += "<a target='_blank' href='"+ "https://www.devspaceconf.com/sessions.html?id=" + val.Id + "'>" + val.Title + "</td><td>";
-                rowbuilder += moment(val.StartTime).format("ddd, h:mm:ss a");
+                rowbuilder += val.DisplayDateTime;
                 rowbuilder += "</td></tr>"
                 $("#speaktable").append(rowbuilder);
             });
@@ -61,7 +78,7 @@
     <!-- HEADER -->
     <div id="header_wrap" class="outer">
         <header class="inner">
-          <a id="forkme_banner" href="https://github.com/dannagle">View on GitHub</a>
+          <a id="forkme_banner" href="https://github.com/dannagle/dannagle.github.io">View on GitHub</a>
 
           <h1 id="project_title">Dan Nagle at GitHub</h1>
 
@@ -72,8 +89,9 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
         <h3><a href="https://www.devspaceconf.com/">DevSpace Speakers</a>.  October 14th(Fri) &amp; 15th(Sat), 2016</h3>
+        <h4>DevSpace Session API: <a href="https://www.devspaceconf.com/api/v1/session">https://www.devspaceconf.com/api/v1/session</a></h4>
         <table id="speaktable">
-            <tr><th  style='min-width:150px'>Speaker</th><th>Talk</th><th style='min-width:120px'>Time</th></tr>
+            <tr><th  style='min-width:150px'>Speaker</th><th>Talk</th><th style='min-width:220px'>Time</th></tr>
         </table>
     </div>
 
