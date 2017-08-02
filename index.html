@@ -36,17 +36,38 @@
             return ((x < y) ? -1 : ((x > y) ? 1 : 0));
         });
     }
+    
+    function bindAbstracts() {
+        $(".abstract").click(function(){
+            var data = $(this).attr("data-abstract");
+            //console.log(data);
+            $(this).parent().html(data);
+            
+            return false;
+            
+            
+        
+        });
+    
+    }
 
     $(document).ready(function(){
         $.getJSON( "session.json", function( data ) {
             for(var i=0; i<data.length; i++) {
                 data[i].StartTime = data[i].TimeSlot.StartTime;
-                data[i].DisplayDateTime = data[i].TimeSlot.DisplayDateTime;
+                if(data[i].StartTime !== null) {
+                    data[i].DisplayDateTime = data[i].TimeSlot.DisplayDateTime;
+                } else {
+                    data[i].DisplayDateTime = "Unassigned";
+                }
             }
             var items = sortByKey(data, "StartTime");
 
             var lastTimeSlot = "asdfasdf";
             var rowbuilder = "";
+            var extlink = ''
+            var extlinkunicode = '&#x279A;'
+            var extlinkimg =  '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAABi0lEQVRIS9WW33GDMAzGLWCAdBN6Ns8NG3SEdoNkgrQTpJ2g2aAjtO9g6hGyQRkAUE85zDnmnw3Xh/CKpB/6rE8GmOMjhNgi4pdjuB2mwCeRc/7BGHvyydGxXiBKWgrzBi2F9UBxHG+iKIqH5Kmq6qyUOrewT8bYo6uMF1Bb/ICIpP9mJLkMgiDNskwlSRI3TUODMRbbKwEECcOQkga7aDNWQagGCCGOiLibkGA15ALinP8aEigA2Od5/m2Dl8hl1iAQdrMOkP4HRHfUgaSUvSlc20nXhNnREGihQUn67ah0IyCayKukKe8g4nNRFCf7A6/OaAgkhHhBxIOLMTVEx5qwWZCjz5iGULxSqrRhsyC9OaZMbUIoTkp5bypAV4wTaApmQ2jDDB2BM8jYiTtEfGCMlQDwrn3HOf/Ra2w1aGog5mzi1dHtgWBk1815yP5xGTuj3vaeK2y/R8SjcZ+VUso7O8blPvLiAsBbnuf7HsjV+Y40Vdd1am6Gbnt7/DNMschTp6qqXocglPgH46wKvvBUSK4AAAAASUVORK5CYII=">';
 
             console.log(items);
             $.each( items, function( key, val ) {
@@ -55,19 +76,21 @@
                     rowbuilder = "<tr style='background:#384452'><td colspan='3'></td></tr>";
                 }
                 lastTimeSlot = (val.StartTime);
-                rowbuilder += "<tr title='"+escapeHtml(val.Abstract)+"'><td>";
+                rowbuilder += "<tr><td>";
                 //rowbuilder += val.Id + "</td><td>";
                 rowbuilder += "<a target='_blank' href='"+ "https://www.devspaceconf.com/speakers.html?id=" + val.Speaker.Id + "'>" + val.Speaker.DisplayName + "</a>";
                 if(val.Room !== null) {
                     rowbuilder += "<br>"+ val.Room + "</td><td>";
                 } else {
-                    rowbuilder += "<br>Not assigned</td><td>";
+                    rowbuilder += "<br>Room: Unassigned</td><td>";
                 }
-                rowbuilder += "<a target='_blank' href='"+ "https://www.devspaceconf.com/sessions.html?id=" + val.Id + "'>" + val.Title + "</td><td>";
+                rowbuilder += "<a target='_blank' href='"+ "https://www.devspaceconf.com/sessions.html?id=" + val.Id + "'>" + val.Title + extlink + "<br><div><br><a data-abstract='"+escapeHtml(val.Abstract)+"' class='abstract' href='#'>View Abstract</a></div></td><td>";
                 rowbuilder += val.DisplayDateTime;
                 rowbuilder += "</td></tr>"
                 $("#speaktable").append(rowbuilder);
             });
+            
+             bindAbstracts();
 
         });
 
@@ -94,7 +117,6 @@
       <section id="main_content" class="inner">
         <h3><a href="https://www.devspaceconf.com/">DevSpace Speakers</a>.  October 13th (Fri) &amp; 14th(Sat), 2017</h3>
         <h4>DevSpace Session API: <a href="https://www.devspaceconf.com/api/v1/session">https://www.devspaceconf.com/api/v1/session</a></h4>
-        <h2>Hover your mouse for session description.</h2>
         <table id="speaktable">
             <tr><th  style='min-width:150px'>Speaker</th><th>Talk</th><th style='min-width:220px'>Time</th></tr>
         </table>
