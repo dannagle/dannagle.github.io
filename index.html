@@ -53,6 +53,22 @@
         });
     
     }
+    
+    function bindTags() {
+        $(".talktag").click(function(){
+            var tagval1 = $(this).attr("data-tagval1");
+            var addhighlight = !$(this).hasClass("talktaghighlight");
+            var tagvalcheck = $(this).attr("data-tagval1");
+            if(addhighlight) {
+                console.log("need to add highlight from " + tagvalcheck);
+                $('*[data-tagval1="'+tagvalcheck+'"]').addClass("talktaghighlight");
+            } else {
+                console.log("need to remove highlight from " + tagvalcheck);
+                $('*[data-tagval1="'+tagvalcheck+'"]').removeClass("talktaghighlight");
+            }
+            return false;
+        });    
+    }
 
     $(document).ready(function(){
         $.getJSON( "session.json", function( data ) {
@@ -91,11 +107,7 @@
                 rowbuilder += val.DisplayDateTime + "<BR>";
 				var tagbuilder = "";
 				$.each( val.Tags, function( key1, val1 ) {
-					if(tagbuilder.length > 1) {
-						tagbuilder += ", ";
-					}
-					tagbuilder += val1.Text;	
-					
+					tagbuilder += "<span class='talktag' data-tagval1='"+val1.Id+"'>" + val1.Text + "</span>";	
 				});
 				rowbuilder += tagbuilder;
                 rowbuilder += "</td></tr>"
@@ -103,6 +115,7 @@
             });
             
              bindAbstracts();
+             bindTags();
 
         });
 
@@ -120,7 +133,6 @@
         <h3><a href="https://www.devspaceconf.com/">DevSpace</a> is October 12th (Fri) &amp; 13th(Sat), 2018</h3>
         <h4>API: <a href="https://www.devspaceconf.com/api/v1/session">www.devspaceconf.com/api/v1/session</a></h4>
         <table id="speaktable">
-            <tr><th  style='min-width:150px'>Speaker</th><th>Talk</th><th style='min-width:220px'>Time</th></tr>
         </table>
     </div>
 

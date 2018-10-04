@@ -44,6 +44,19 @@ table {
   border-spacing: 0;
 }
 
+.talktag {
+    border: 1px solid blue;
+    padding: 1px 1px 1px 1px;
+    margin: 3px 3px 3px 3px;
+    cursor: crosshair;
+}
+
+.talktaghighlight {
+    background: yellow;
+
+}
+
+
 /*******************************************************************************
 Theme Styles
 *******************************************************************************/
