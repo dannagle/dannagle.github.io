@@ -1,5 +1,9 @@
-# dannagle.github.io
-GitHub playground.
+The schedule is viewable here:
+https://dannagle.github.io/
 
-Currently showing DevSpace schedule:
-https://www.devspaceconf.com/sessions.html
+
+DevSpace is an annual conference held in Huntsville, AL.
+
+Learn more:
+https://www.devspaceconf.com/
+
