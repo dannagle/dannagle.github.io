@@ -88,7 +88,16 @@
                     rowbuilder += "<br>Room: Unassigned</td><td>";
                 }
                 rowbuilder += "<a target='_blank' href='"+ "https://www.devspaceconf.com/sessions.html?id=" + val.Id + "'>" + val.Title + extlink + "<br><div><br><a data-abstract='"+escapeHtml(val.Abstract)+"' class='abstract' href='#'>View Abstract</a></div></td><td>";
-                rowbuilder += val.DisplayDateTime;
+                rowbuilder += val.DisplayDateTime + "<BR>";
+				var tagbuilder = "";
+				$.each( val.Tags, function( key1, val1 ) {
+					if(tagbuilder.length > 1) {
+						tagbuilder += ", ";
+					}
+					tagbuilder += val1.Text;	
+					
+				});
+				rowbuilder += tagbuilder;
                 rowbuilder += "</td></tr>"
                 $("#speaktable").append(rowbuilder);
             });
