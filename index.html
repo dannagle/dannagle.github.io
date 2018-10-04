@@ -30,9 +30,12 @@
       });
     }
 
-    function sortByKey(array, key) {
+    function sortByKeys(array, key1, key2) {
         return array.sort(function(a, b) {
-            var x = a[key]; var y = b[key];
+            var x = a[key1]; var y = b[key1];
+			if(x == y) {
+				x = a[key2]; y = b[key2];
+			}
             return ((x < y) ? -1 : ((x > y) ? 1 : 0));
         });
     }
@@ -61,7 +64,7 @@
                     data[i].DisplayDateTime = "Unassigned";
                 }
             }
-            var items = sortByKey(data, "StartTime");
+            var items = sortByKeys(data, "StartTime", "Room");
 
             var lastTimeSlot = "asdfasdf";
             var rowbuilder = "";
