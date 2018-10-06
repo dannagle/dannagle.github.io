@@ -39,21 +39,21 @@
             return ((x < y) ? -1 : ((x > y) ? 1 : 0));
         });
     }
-    
+
     function bindAbstracts() {
         $(".abstract").click(function(){
             var data = $(this).attr("data-abstract");
             //console.log(data);
             $(this).parent().html(data);
-            
+
             return false;
-            
-            
-        
+
+
+
         });
-    
+
     }
-    
+
     function bindTags() {
         $(".talktag").click(function(){
             var tagval1 = $(this).attr("data-tagval1");
@@ -67,7 +67,7 @@
                 $('*[data-tagval1="'+tagvalcheck+'"]').removeClass("talktaghighlight");
             }
             return false;
-        });    
+        });
     }
 
     $(document).ready(function(){
@@ -103,17 +103,17 @@
                 } else {
                     rowbuilder += "<br>Room: Unassigned</td><td>";
                 }
-                rowbuilder += "<a target='_blank' href='"+ "https://www.devspaceconf.com/sessions.html?id=" + val.Id + "'>" + val.Title + extlink + "<br><div><br><a data-abstract='"+escapeHtml(val.Abstract)+"' class='abstract' href='#'>View Abstract</a></div></td><td>";
+                rowbuilder += "<a target='_blank' href='"+ "https://www.devspaceconf.com/sessions.html?id=" + val.Id + "'>" + val.Title + extlink + "<br><div><br><a data-abstract='"+escapeHtml(val.Abstract)+"' class='abstract' href='#'>View Abstract</a></div></td><td class='timeandtags'>";
                 rowbuilder += val.DisplayDateTime + "<BR>";
 				var tagbuilder = "";
 				$.each( val.Tags, function( key1, val1 ) {
-					tagbuilder += "<span class='talktag' data-tagval1='"+val1.Id+"'>" + val1.Text + "</span>";	
+					tagbuilder += " <span class='talktag' data-tagval1='"+val1.Id+"'>" + val1.Text + "</span>";
 				});
 				rowbuilder += tagbuilder;
                 rowbuilder += "</td></tr>"
                 $("#speaktable").append(rowbuilder);
             });
-            
+
              bindAbstracts();
              bindTags();
 

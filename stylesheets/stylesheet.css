@@ -49,6 +49,8 @@ table {
     padding: 1px 1px 1px 1px;
     margin: 3px 3px 3px 3px;
     cursor: crosshair;
+    white-space: nowrap;
+    line-height: 2em;
 }
 
 .talktaghighlight {
@@ -56,6 +58,10 @@ table {
 
 }
 
+.timeandtags {
+    max-width: 400px;
+    min-width: 300px;
+}
 
 /*******************************************************************************
 Theme Styles
@@ -258,7 +264,7 @@ td {
   border: 1px solid #373737;
  }
 
- 
+
 /*******************************************************************************
 Full-Width Styles
 *******************************************************************************/
