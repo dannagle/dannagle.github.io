@@ -64,7 +64,7 @@ Theme Styles
 body {
   box-sizing: border-box;
   color:#373737;
-  background: #f2f2f2;
+  background: #f3f3f3;
   font-size: 16px;
   font-family: 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -110,9 +110,6 @@ p {
   margin: 10px 0 15px 0;
 }
 
-footer p {
-  color: #f2f2f2;
-}
 
 a {
   text-decoration: none;
@@ -133,10 +130,6 @@ a {
 
 a:hover, a:focus {text-decoration: underline;}
 
-footer a {
-  color: #F2F2F2;
-  text-decoration: underline;
-}
 
 em {
   font-style: italic;
@@ -260,6 +253,7 @@ th {
  }
 
 td {
+	font-size: 110%;
   padding: 10px;
   border: 1px solid #373737;
  }
@@ -277,5 +271,5 @@ Full-Width Styles
 
 
 tr:hover {
-	background: #FFE692;
+	background: #e3e3e3;
 }
