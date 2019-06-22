@@ -6,11 +6,23 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="description" content="DevSpace Speaker Chart by Dan Nagle">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css?v=2">
+
+    <meta property="og:title" content="DevSpace Speaker Chart by Dan Nagle."/>
+    <meta property="og:url" content="https://www.devspaceconf.com/sessions.html"/>
+    <meta property="og:image" content="https://dannagle.github.io/devspace-logo.png"/>
+    <meta property="og:description" content="DevSpace starts Oct 11th in downtown Huntsville, AL."/>
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@naglecode" />
+    <meta name="twitter:creator" content="@naglecode" />
+
+
+    <link rel="shortcut icon" href="devspace-logo.png">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css?v=3">
 
     <title>DevSpace Speaker Chart by Dan Nagle</title>
 
-    <script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="moment.js"></script>
 
 
@@ -89,13 +101,22 @@
             var extlinkimg =  '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAABi0lEQVRIS9WW33GDMAzGLWCAdBN6Ns8NG3SEdoNkgrQTpJ2g2aAjtO9g6hGyQRkAUE85zDnmnw3Xh/CKpB/6rE8GmOMjhNgi4pdjuB2mwCeRc/7BGHvyydGxXiBKWgrzBi2F9UBxHG+iKIqH5Kmq6qyUOrewT8bYo6uMF1Bb/ICIpP9mJLkMgiDNskwlSRI3TUODMRbbKwEECcOQkga7aDNWQagGCCGOiLibkGA15ALinP8aEigA2Od5/m2Dl8hl1iAQdrMOkP4HRHfUgaSUvSlc20nXhNnREGihQUn67ah0IyCayKukKe8g4nNRFCf7A6/OaAgkhHhBxIOLMTVEx5qwWZCjz5iGULxSqrRhsyC9OaZMbUIoTkp5bypAV4wTaApmQ2jDDB2BM8jYiTtEfGCMlQDwrn3HOf/Ra2w1aGog5mzi1dHtgWBk1815yP5xGTuj3vaeK2y/R8SjcZ+VUso7O8blPvLiAsBbnuf7HsjV+Y40Vdd1am6Gbnt7/DNMschTp6qqXocglPgH46wKvvBUSK4AAAAASUVORK5CYII=">';
 
             console.log(items);
+            var rowcounter = 0;
             $.each( items, function( key, val ) {
+
+                rowcounter++;
+                var classtext = " class='altrow' ";
                 rowbuilder = "";
                 if(lastTimeSlot != val.StartTime) {
                     rowbuilder = "<tr style='background:#384452'><td colspan='3'></td></tr>";
                 }
+
+                if((rowcounter % 2) == 0) {
+                    classtext = "";
+                }
+
                 lastTimeSlot = (val.StartTime);
-                rowbuilder += "<tr><td>";
+                rowbuilder += "<tr "+classtext+" ><td>";
                 //rowbuilder += val.Id + "</td><td>";
                 rowbuilder += "<a target='_blank' href='"+ "https://www.devspaceconf.com/speakers.html?id=" + val.Speaker.Id + "'>" + val.Speaker.DisplayName + "</a>";
                 if(val.Room !== null) {
@@ -111,6 +132,8 @@
 				});
 				rowbuilder += tagbuilder;
                 rowbuilder += "</td></tr>"
+
+                //console.log(rowcounter, rowbuilder);
                 $("#speaktable").append(rowbuilder);
             });
 
@@ -130,9 +153,11 @@
 
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
+        <!--
         <div style="text-align:right;font-weight:bold;font-size:110%;"><a target="_blank" href="https://www.cummingsaerospace.com/careers/index">Cummings Aerospace is hiring SW Engineers!</a></div>
+        -->
         <h3><a target="_blank" href="https://www.devspaceconf.com/">DevSpaceConf.com</a>
-            &nbsp;&nbsp;&nbsp; <a target="_blank" href="https://twitter.com/hashtag/devspace18">#DevSpace18</a>
+            &nbsp;&nbsp;&nbsp; <a target="_blank" href="https://twitter.com/hashtag/devspace19">#DevSpace19</a>
             &nbsp;&nbsp;&nbsp; <a target="_blank" href="https://twitter.com/devspaceconf">@devspaceconf</a>
             &nbsp;&nbsp;&nbsp; <a target="_blank" href="https://www.devspaceconf.com/api/v1/session">API</a>
         </h4>

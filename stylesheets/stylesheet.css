@@ -276,7 +276,10 @@ Full-Width Styles
 
 }
 
+.altrow {
+	background: #ddd;
+}
 
 tr:hover {
-	background: #e3e3e3;
+	background: #ffffee;
 }
