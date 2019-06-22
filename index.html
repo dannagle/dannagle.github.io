@@ -83,7 +83,7 @@
     }
 
     $(document).ready(function(){
-        $.getJSON( "session.json", function( data ) {
+        $.getJSON( "session2019-1.json", function( data ) {
             for(var i=0; i<data.length; i++) {
                 data[i].StartTime = data[i].TimeSlot.StartTime;
                 if(data[i].StartTime !== null) {
