@@ -99,6 +99,8 @@
 
         $("#showAll").click(viewAll);
 
+        var uniquetags = [];
+
 
         $.getJSON( "session2018.json", function( data ) {
             for(var i=0; i<data.length; i++) {
@@ -117,7 +119,7 @@
             var extlinkunicode = '&#x279A;'
             var extlinkimg =  '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAABi0lEQVRIS9WW33GDMAzGLWCAdBN6Ns8NG3SEdoNkgrQTpJ2g2aAjtO9g6hGyQRkAUE85zDnmnw3Xh/CKpB/6rE8GmOMjhNgi4pdjuB2mwCeRc/7BGHvyydGxXiBKWgrzBi2F9UBxHG+iKIqH5Kmq6qyUOrewT8bYo6uMF1Bb/ICIpP9mJLkMgiDNskwlSRI3TUODMRbbKwEECcOQkga7aDNWQagGCCGOiLibkGA15ALinP8aEigA2Od5/m2Dl8hl1iAQdrMOkP4HRHfUgaSUvSlc20nXhNnREGihQUn67ah0IyCayKukKe8g4nNRFCf7A6/OaAgkhHhBxIOLMTVEx5qwWZCjz5iGULxSqrRhsyC9OaZMbUIoTkp5bypAV4wTaApmQ2jDDB2BM8jYiTtEfGCMlQDwrn3HOf/Ra2w1aGog5mzi1dHtgWBk1815yP5xGTuj3vaeK2y/R8SjcZ+VUso7O8blPvLiAsBbnuf7HsjV+Y40Vdd1am6Gbnt7/DNMschTp6qqXocglPgH46wKvvBUSK4AAAAASUVORK5CYII=">';
 
-            console.log(items);
+            //console.log(items);
             var rowcounter = 0;
             $.each( items, function( key, val ) {
 
@@ -146,6 +148,17 @@
 				var tagbuilder = "";
 				$.each( val.Tags, function( key1, val1 ) {
 					tagbuilder += " <span class='talktag' data-tagval1='"+val1.Id+"'>" + val1.Text + "</span>";
+                    if(uniquetags[val1.Id]) {
+                        uniquetags[val1.Id]["count"]++;
+                        uniquetags[val1.Id]["title"] = uniquetags[val1.Id]["title"] + "\n" + val.Title;
+                    } else {
+                        uniquetags[val1.Id] = {};
+                        uniquetags[val1.Id]["count"] = 1;
+                        uniquetags[val1.Id]["text"] = val1.Text;
+                        uniquetags[val1.Id]["id"] = val1.Id;
+                        uniquetags[val1.Id]["title"] = val.Title;
+                    }
+                    
 				});
 				rowbuilder += tagbuilder;
                 rowbuilder += "</td></tr>"
@@ -154,10 +167,34 @@
                 $("#speaktable").append(rowbuilder);
             });
 
-             bindAbstracts();
-             bindTags();
+
+            var keys = Object.keys(uniquetags);
+            console.log("uniquetags", uniquetags);
+            //console.log("keys", keys);
+
+            $.each( keys, function( index ) {
+
+                console.log("index", index);
+
+                if(uniquetags[index]) {
+                    var tg = uniquetags[index];
+                    console.log("tg", tg);
+
+                    var title = tg["title"].replace("'", "");
+
+                    tagbuilder = " <span title='"+title+"' class='talktag' data-tagval1='"+tg["id"]+"'>" + tg["text"] + " ("+ tg["count"] +")" + "</span>";
+                    $("#tagsearch").html($("#tagsearch").html() + tagbuilder);
+                }
+
+            });
+
+            bindAbstracts();
+            bindTags();
 
         });
+
+
+
 
     });
 
@@ -179,7 +216,10 @@
             &nbsp;&nbsp;&nbsp; <a target="_blank" href="https://twitter.com/devspaceconf">@devspaceconf</a>
             &nbsp;&nbsp;&nbsp; <a target="_blank" href="https://www.devspaceconf.com/api/v1/session">API</a>
         </h4>
-        <button id="showAll"> View All </button>
+        <div id="tagsearch">
+
+        </div>
+        <button id="showAll"> View All Abstracts</button>
         <table id="speaktable" style="width:100%;">
         </table>
     </div>
