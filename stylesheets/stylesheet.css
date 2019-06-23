@@ -283,3 +283,7 @@ Full-Width Styles
 tr:hover {
 	background: #ffffee;
 }
+
+.top-right {
+  text-align:right;font-weight:bold;font-size:110%;
+}

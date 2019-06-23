@@ -18,7 +18,7 @@
 
     <link rel="shortcut icon" href="devspace-logo.png">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css?v=3">
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css?v=4">
 
     <title>DevSpace Speaker Chart by Dan Nagle</title>
 
@@ -82,7 +82,24 @@
         });
     }
 
+    function viewAll() {
+        
+        $(".abstract").each(function(){
+            var data = $(this).attr("data-abstract");
+            //console.log(data);
+            $(this).parent().html(data);
+        });
+
+        $("#showAll").remove();
+        return false;
+
+    }
+
     $(document).ready(function(){
+
+        $("#showAll").click(viewAll);
+
+
         $.getJSON( "session2018.json", function( data ) {
             for(var i=0; i<data.length; i++) {
                 data[i].StartTime = data[i].TimeSlot.StartTime;
@@ -154,13 +171,15 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
         <!--
-        <div style="text-align:right;font-weight:bold;font-size:110%;"><a target="_blank" href="https://www.cummingsaerospace.com/careers/index">Cummings Aerospace is hiring SW Engineers!</a></div>
+        <div class="top-right"><a target="_blank" href="https://www.cummingsaerospace.com/careers/index">Cummings Aerospace is hiring SW Engineers!</a></div>
         -->
         <h3><a target="_blank" href="https://www.devspaceconf.com/">DevSpaceConf.com</a>
+            &nbsp;&nbsp;&nbsp; <a target="_blank" href="https://www.eventbrite.com/e/devspace-2019-registration-61082641826">Eventbrite</a>
             &nbsp;&nbsp;&nbsp; <a target="_blank" href="https://twitter.com/hashtag/devspace19">#DevSpace19</a>
             &nbsp;&nbsp;&nbsp; <a target="_blank" href="https://twitter.com/devspaceconf">@devspaceconf</a>
             &nbsp;&nbsp;&nbsp; <a target="_blank" href="https://www.devspaceconf.com/api/v1/session">API</a>
         </h4>
+        <button id="showAll"> View All </button>
         <table id="speaktable" style="width:100%;">
         </table>
     </div>
