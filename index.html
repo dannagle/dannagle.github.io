@@ -83,7 +83,7 @@
     }
 
     function viewAll() {
-        
+
         $(".abstract").each(function(){
             var data = $(this).attr("data-abstract");
             //console.log(data);
@@ -100,6 +100,7 @@
         $("#showAll").click(viewAll);
 
         var uniquetags = [];
+        var tagmax = -1;
 
 
         $.getJSON( "session2018.json", function( data ) {
@@ -147,7 +148,12 @@
                 rowbuilder += val.DisplayDateTime + "<BR>";
 				var tagbuilder = "";
 				$.each( val.Tags, function( key1, val1 ) {
-					tagbuilder += " <span class='talktag' data-tagval1='"+val1.Id+"'>" + val1.Text + "</span>";
+                    tagbuilder += " <span class='talktag' data-tagval1='"+val1.Id+"'>" + val1.Text + "</span>";
+
+                    if(val1.Id > tagmax) {
+                        tagmax = val1.Id;
+                    }
+
                     if(uniquetags[val1.Id]) {
                         uniquetags[val1.Id]["count"]++;
                         uniquetags[val1.Id]["title"] = uniquetags[val1.Id]["title"] + "\n" + val.Title;
@@ -158,7 +164,7 @@
                         uniquetags[val1.Id]["id"] = val1.Id;
                         uniquetags[val1.Id]["title"] = val.Title;
                     }
-                    
+
 				});
 				rowbuilder += tagbuilder;
                 rowbuilder += "</td></tr>"
@@ -170,12 +176,10 @@
 
             var keys = Object.keys(uniquetags);
             console.log("uniquetags", uniquetags);
-            //console.log("keys", keys);
+            console.log("keys", keys);
+            console.log("tagmax", tagmax);
 
-            $.each( keys, function( index ) {
-
-                console.log("index", index);
-
+            for(var index = 1; index <= tagmax; index++ ) {
                 if(uniquetags[index]) {
                     var tg = uniquetags[index];
                     console.log("tg", tg);
@@ -184,9 +188,12 @@
 
                     tagbuilder = " <span title='"+title+"' class='talktag' data-tagval1='"+tg["id"]+"'>" + tg["text"] + " ("+ tg["count"] +")" + "</span>";
                     $("#tagsearch").html($("#tagsearch").html() + tagbuilder);
+                } else {
+                console.log("skipping", index);
+
                 }
 
-            });
+            }
 
             bindAbstracts();
             bindTags();
@@ -226,3 +233,4 @@
 
   </body>
 </html>
+
