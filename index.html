@@ -178,22 +178,31 @@
             console.log("uniquetags", uniquetags);
             console.log("keys", keys);
             console.log("tagmax", tagmax);
-
+            
+            var tagArray = [];
             for(var index = 1; index <= tagmax; index++ ) {
                 if(uniquetags[index]) {
-                    var tg = uniquetags[index];
-                    console.log("tg", tg);
-
-                    var title = tg["title"].replace("'", "");
-
-                    tagbuilder = " <span title='"+title+"' class='talktag' data-tagval1='"+tg["id"]+"'>" + tg["text"] + " ("+ tg["count"] +")" + "</span>";
-                    $("#tagsearch").html($("#tagsearch").html() + tagbuilder);
-                } else {
-                console.log("skipping", index);
-
+                    tagArray.push(uniquetags[index]);
                 }
-
             }
+            
+            console.log("tagArray", tagArray);
+           
+            tagArray.sort(function(a, b) {
+                return b["count"] - a["count"];
+            });
+            
+            
+
+            tagArray.forEach(function(tg) {
+
+                console.log("tg", tg);
+
+                var title = tg["title"].replace("'", "");
+
+                tagbuilder = " <span style='font-size:110%' title='"+title+"' class='talktag' data-tagval1='"+tg["id"]+"'>" + tg["text"] + " ("+ tg["count"] +")" + "</span>";
+                $("#tagsearch").html($("#tagsearch").html() + tagbuilder);
+            });
 
             bindAbstracts();
             bindTags();
