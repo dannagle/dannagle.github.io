@@ -79,7 +79,6 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  margin: 10px 0;
   font-weight: 700;
   color:#222222;
   font-family: 'Lucida Grande', 'Calibri', Helvetica, Arial, sans-serif;
@@ -285,5 +284,12 @@ tr:hover {
 }
 
 .top-right {
-  text-align:right;font-weight:bold;font-size:110%;
+  float:right;
+  font-weight:bold;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  
 }
