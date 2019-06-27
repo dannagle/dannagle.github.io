@@ -1,5 +1,6 @@
 <?php
 
+chdir(__DIR__);
 
 exec("git pull");
 
