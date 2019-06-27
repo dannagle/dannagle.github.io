@@ -6,10 +6,9 @@ exec("git pull");
 $date = date("Y-m-d__H_i_s");
 $newfile = "session-$date.json";
 
-echo $newfile ."\n";
 
 $newsession = trim(file_get_contents("https://www.devspaceconf.com/api/v1/session"));
-
+//$newsession = trim(file_get_contents("session.txt"));
 
 $appjs = file_get_contents("app.js");
 $sessionpos = stripos($appjs, "getJSON");
@@ -20,11 +19,29 @@ $stop =  $sessionposEnd - $start;
 $sessionfile = substr($appjs, $start, $stop);
 
 $sessionfile = trim(str_ireplace(array("\"", ":", ",", " "), "", $sessionfile));
-echo $sessionfile ."\n";
-
 $oldsession = trim(file_get_contents($sessionfile));
 
-if($newsession != $oldsession) {
+$js1 = json_decode($oldsession, true);
+$js2 = json_decode($newsession, true);
+
+
+//DevSpace API has a quirk that a null date returns the current time. This confuses my diff.
+//Lets just unset the DisplayDateTime
+
+for($i = 0; $i < count($js1); $i++) {
+        $js1[$i]["TimeSlot"]["DisplayDateTime"] = "";
+}
+for($i = 0; $i < count($js2); $i++) {
+        $js2[$i]["TimeSlot"]["DisplayDateTime"] = "";
+}
+
+//print_r($js1[0]); exit;
+
+$js1text = json_encode($js1, JSON_PRETTY_PRINT);
+$js2text = json_encode($js2, JSON_PRETTY_PRINT);
+
+
+if($js1text != $js2text) {
         echo "Need new DevSpace session\n";
         $appjs = str_replace($sessionfile, $newfile, $appjs);
         file_put_contents($newfile, $newsession);
@@ -37,7 +54,7 @@ if($newsession != $oldsession) {
         //exec("git push");
 
 } else {
-        echo "Do NOT new devspace session\n";
+        echo "DevSpace session is current\n";
 }
 
 echo "\n";
