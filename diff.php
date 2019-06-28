@@ -55,7 +55,6 @@ if($js1text != $js2text) {
         //exec("git push");
 
 } else {
-        echo "DevSpace session is current\n";
+        // echo "DevSpace session is current\n";
 }
 
-echo "\n";
