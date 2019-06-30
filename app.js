@@ -129,7 +129,7 @@ $(document).ready(function(){
             } else {
                 rowbuilder += "<br>Room: Unassigned</td><td>";
             }
-            rowbuilder += "<a target='_blank' href='"+ "https://www.devspaceconf.com/sessions.html?id=" + val.Id + "'>" + val.Title + extlink + "<br><div><br><a data-abstract='"+escapeHtml(val.Abstract)+"' class='abstract' href='#'>View Abstract</a></div></td><td class='timeandtags'>";
+            rowbuilder += "<a target='_blank' href='"+ "https://www.devspaceconf.com/sessions.html?id=" + val.Id + "'>" + val.Title + extlink + "<br><div><br><a data-abstract='"+escapeHtml(val.Abstract)+"' class='no-print abstract' href='#'>View Abstract</a></div></td><td class='timeandtags'>";
             rowbuilder += val.DisplayDateTime + "<BR>";
             var tagbuilder = "";
             $.each( val.Tags, function( key1, val1 ) {

@@ -25,6 +25,20 @@
     <script type="text/javascript" src="moment.js"></script>
     <script type="text/javascript" src="app.js?v=2"></script>
 
+
+<style>
+
+/* do not show when printing */
+@media print
+{
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+}
+
+</style>
+
 </head>
 
   <body>
@@ -33,7 +47,7 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
         <div class="top-right"><a target="_blank" href="https://www.cummingsaerospace.com/careers/index">&nbsp;&nbsp;Cummings Aerospace is hiring!&nbsp;&nbsp;</a></div>
-        <h3><a  class="hidden-mobile" target="_blank" href="https://www.devspaceconf.com/">DevSpaceConf.com</a>
+        <h3 class="no-print"><a  class="hidden-mobile" target="_blank" href="https://www.devspaceconf.com/">DevSpaceConf.com</a>
             <span class="hidden-mobile"> &nbsp;&nbsp;&nbsp; </span><a class="hidden-mobile" target="_blank" href="https://www.eventbrite.com/e/devspace-2019-registration-61082641826">Eventbrite</a>
             <span class="hidden-mobile"> &nbsp;&nbsp;&nbsp; </span><a target="_blank" href="https://twitter.com/hashtag/devspace19">#DevSpace19</a>
             &nbsp;&nbsp;&nbsp; <a target="_blank" href="https://twitter.com/devspaceconf">@devspaceconf</a>
@@ -41,11 +55,11 @@
             API is at: https://www.devspaceconf.com/api/v1/session
             -->
         </h3>
-        <div id="tagsearch">
+        <div class="no-print" id="tagsearch">
 
         </div>
-        <button id="showAllTags"> View All Tags</button>
-        <button id="showAll"> View All Abstracts</button>
+        <button class="no-print" id="showAllTags"> View All Tags</button>
+        <button class="no-print" id="showAll"> View All Abstracts</button>
         <table id="speaktable" style="width:100%;">
         </table>
     </div>
