@@ -67,9 +67,22 @@ function viewAll() {
 
 }
 
+function viewAllTags() {
+
+    $(".talktagtop").each(function(){
+        $(this).removeClass("hidden");
+        $(this).removeClass("hidden-mobile");
+    });
+
+    $("#showAllTags").remove();
+    return false;
+
+}
+
 $(document).ready(function(){
 
     $("#showAll").click(viewAll);
+    $("#showAllTags").click(viewAllTags);
 
     var uniquetags = [];
     var tagmax = -1;
@@ -166,13 +179,20 @@ $(document).ready(function(){
 
 
 
+        var tagcounter = 0;
         tagArray.forEach(function(tg) {
 
             //console.log("tg", tg);
 
             var title = tg["title"].replace("'", "");
 
-            tagbuilder = " <span style='font-size:110%' title='"+title+"' class='talktag' data-tagval1='"+tg["id"]+"'>" + tg["text"] + " ("+ tg["count"] +")" + "</span>";
+            tagcounter++;
+            var tagclass = "";
+            if(tagcounter > 10) {
+                tagclass = " hidden ";
+            }
+
+            tagbuilder = " <span title='"+title+"' class='hidden-mobile talktag talktagtop "+tagclass+"' data-tagval1='"+tg["id"]+"'>" + tg["text"] + " ("+ tg["count"] +")" + "</span>";
             $("#tagsearch").html($("#tagsearch").html() + tagbuilder);
         });
 

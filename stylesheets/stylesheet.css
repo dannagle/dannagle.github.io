@@ -298,3 +298,24 @@ a.abstract {
   font-size: 80%;
 
 }
+
+.talktagtop {
+  font-size: 110%;
+}
+
+.hidden {
+  display: none;
+}
+
+/* hide on small screens */
+@media only screen and (max-width: 767px), only screen and (max-device-width: 767px) {
+    .hidden-mobile {
+        display: none;
+    }
+
+    .talktagtop {
+        font-size: 70%;
+    }
+
+}
+
