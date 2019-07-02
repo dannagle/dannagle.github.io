@@ -88,7 +88,7 @@ $(document).ready(function(){
     var tagmax = -1;
 
 
-    $.getJSON( "session2018.json", function( data ) {
+    $.getJSON( jsonFile, function( data ) {
         for(var i=0; i<data.length; i++) {
             data[i].StartTime = data[i].TimeSlot.StartTime;
             if(data[i].StartTime !== null) {

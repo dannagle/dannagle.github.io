@@ -15,15 +15,16 @@ if(empty($newsession)) {
     exit;
 }
 
-$appjs = file_get_contents("app.js");
-$sessionpos = stripos($appjs, "getJSON");
-$sessionposEnd = stripos($appjs, "function", $sessionpos);
+$appjs = file_get_contents("index.html");
+$sessionpos = stripos($appjs, "jsonFile");
+$sessionposEnd = stripos($appjs, "sessions", $sessionpos);
 
 $start = $sessionpos+8;
 $stop =  $sessionposEnd - $start;
 $sessionfile = substr($appjs, $start, $stop);
 
-$sessionfile = trim(str_ireplace(array("\"", ":", ",", " "), "", $sessionfile));
+$sessionfile = trim(str_ireplace(array("\"", ":", ",", " ", "/", ";", "="), "", $sessionfile));
+
 $oldsession = trim(file_get_contents($sessionfile));
 
 $js1 = @json_decode($oldsession, true);
@@ -53,13 +54,13 @@ $js2text = json_encode($js2, JSON_PRETTY_PRINT);
 
 if($js1text != $js2text) {
     echo "Need new DevSpace session\n";
-    $appjs = str_replace($sessionfile, $newfile, $appjs);
+    $indexhtml = str_replace($sessionfile, $newfile, $indexhtml);
     file_put_contents($newfile, $newsession);
-    file_put_contents("app.js", $appjs);
+    file_put_contents("index.html", $indexhtml);
 
     echo "Need to update to GitHub\n";
     //exec("git rm $sessionfile");
-    //exec("git add app.js $newfile");
+    //exec("git add index.html $newfile");
     //exec("git commit -m 'Latest DevSpace session'");
     //exec("git push");
 
