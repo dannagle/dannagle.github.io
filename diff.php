@@ -15,13 +15,13 @@ if(empty($newsession)) {
     exit;
 }
 
-$appjs = file_get_contents("index.html");
-$sessionpos = stripos($appjs, "jsonFile");
-$sessionposEnd = stripos($appjs, "sessions", $sessionpos);
+$indexhtml = file_get_contents("index.html");
+$sessionpos = stripos($indexhtml, "jsonFile");
+$sessionposEnd = stripos($indexhtml, "sessions", $sessionpos);
 
 $start = $sessionpos+8;
 $stop =  $sessionposEnd - $start;
-$sessionfile = substr($appjs, $start, $stop);
+$sessionfile = substr($indexhtml, $start, $stop);
 
 $sessionfile = trim(str_ireplace(array("\"", ":", ",", " ", "/", ";", "="), "", $sessionfile));
 
