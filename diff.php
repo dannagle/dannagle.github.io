@@ -59,10 +59,10 @@ if($js1text != $js2text) {
     file_put_contents("index.html", $indexhtml);
 
     echo "Need to update to GitHub\n";
-    //exec("git rm $sessionfile");
-    //exec("git add index.html $newfile");
-    //exec("git commit -m 'Latest DevSpace session'");
-    //exec("git push");
+    exec("git rm $sessionfile");
+    exec("git add index.html $newfile");
+    exec("git commit -m 'Latest DevSpace session'");
+    exec("git push");
 
 } else {
     //echo "DevSpace session is current\n";
