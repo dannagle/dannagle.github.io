@@ -2,6 +2,13 @@
 
 chdir(__DIR__);
 
+$output = array();
+$result = 0;
+
+//github constantly moving hosts around and causing host-added warning.
+exec("git fetch 2>/dev/null", $output, $result);
+
+//With that warning gone, I will only get real errors from this.
 exec("git pull");
 
 $date = date("Y-m-d__H_i_s");
