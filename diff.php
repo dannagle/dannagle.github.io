@@ -38,6 +38,11 @@ $js1 = @json_decode($oldsession, true);
 $js2 = @json_decode($newsession, true);
 
 
+if(empty($js1)) {
+    echo "Old session json is bad. Seeding with empty.\n";
+    $js1 = [];
+}
+
 if(empty($js2)) {
     echo "DevSpace returned bad json\n";
     exit;
