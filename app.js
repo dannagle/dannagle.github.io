@@ -123,7 +123,15 @@ $(document).ready(function(){
             lastTimeSlot = (val.StartTime);
             rowbuilder += "<tr "+classtext+" ><td>";
             //rowbuilder += val.Id + "</td><td>";
-            rowbuilder += "<a target='_blank' href='"+ "https://www.devspaceconf.com/speakers.html?id=" + val.Speaker.Id + "'>" + val.Speaker.DisplayName + "</a>";
+            speakercount = 0;
+            $.each( val.Speakers, function( key1, thespeaker ) {
+                if(speakercount > 0) {
+                    rowbuilder += " / ";
+                }
+                rowbuilder += "<a target='_blank' href='"+ "https://www.devspaceconf.com/speakers.html?id=" + thespeaker.Id + "'>" + thespeaker.DisplayName + "</a>";
+                speakercount += 1;
+            });
+
             if(val.Room !== null) {
                 rowbuilder += "<br>"+ val.Room + "</td><td>";
             } else {
